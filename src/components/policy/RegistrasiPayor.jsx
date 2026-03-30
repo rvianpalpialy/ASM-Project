@@ -10,7 +10,7 @@ const RegistrasiPayor = () => {
     phone: '',
     email: '',
     contactPerson: ''
-  });
+  }); 
 
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState(null)  
