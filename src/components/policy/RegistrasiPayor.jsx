@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../../styles/Policy.css';
+import api from '../../services/api';
 
 const RegistrasiPayor = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,9 @@ const RegistrasiPayor = () => {
     contactPerson: ''
   });
 
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState(null)  
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -18,17 +22,34 @@ const RegistrasiPayor = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert('Registrasi Payor berhasil!\n' + JSON.stringify(formData, null, 2));
-    setFormData({
-      payorCode: '',
-      payorName: '',
-      address: '',
-      phone: '',
-      email: '',
-      contactPerson: ''
-    });
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    setMessage(null)
+  
+    try {
+      await api.post('/payor', formData)
+  
+      setMessage({ type: 'success', text: 'Registrasi Payor berhasil disimpan!' })
+  
+      // reset form seperti sebelumnya
+      setFormData({
+        payorCode: '',
+        payorName: '',
+        address: '',
+        phone: '',
+        email: '',
+        contactPerson: ''
+      })
+  
+    } catch (err) {
+      setMessage({
+        type: 'error',
+        text: 'Gagal: ' + (err.response?.data?.error || 'Server tidak bisa dihubungi')
+      })
+    } finally {
+      setLoading(false)
+    }
   };
 
   return (
@@ -108,11 +129,32 @@ const RegistrasiPayor = () => {
             placeholder="Nama PIC"
           />
         </div>
+        
+        {/* Notifikasi sukses / error */}
+    {message && (
+  <div style={{
+    padding: '12px 16px',
+    marginBottom: '16px',
+    borderRadius: '6px',
+    background: message.type === 'success' ? '#e6f4ea' : '#fce8e6',
+    color:      message.type === 'success' ? '#1e7e34' : '#c0392b',
+    border:     message.type === 'success' ? '1px solid #a8d5b5' : '1px solid #f5a9a9',
+  }}>
+    {message.text}
+  </div>
+)}
 
-        <button type="submit" className="btn-submit">Simpan Payor</button>
+{/* Tombol — tambah disabled saat loading */}
+<button
+  type="submit"
+  className="btn-submit"
+  disabled={loading}
+  style={{ opacity: loading ? 0.7 : 1 }}
+>
+  {loading ? 'Menyimpan...' : 'Simpan Payor'}
+</button>
       </form>
     </div>
   );
 };
-
 export default RegistrasiPayor;

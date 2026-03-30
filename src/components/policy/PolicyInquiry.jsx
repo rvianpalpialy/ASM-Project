@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/Policy.css';
 
+
 const PolicyInquiry = () => {
   return (
     <div className="policy-inquiry">
