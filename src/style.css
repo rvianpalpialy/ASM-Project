@@ -1,0 +1,6 @@
+
+body{margin:0;font-family:Arial}
+.header{background:#b30000;color:#fff;padding:10px}
+.nav{background:#eee;padding:10px;display:flex;gap:20px;cursor:pointer}
+.submenu{background:#ddd;padding:10px}
+.content{padding:20px}
