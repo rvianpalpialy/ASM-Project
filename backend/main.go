@@ -13,7 +13,7 @@ import (
 )
 
 func main() {
-	db, err := sql.Open("godror", "user/pass@localhost:1521/ORCL")
+	db, err := sql.Open("godror", "POOLDATA/POOLDATA12@192.168.122.100:1521/dev_ahid")
 	if err != nil {
 		log.Fatal("Gagal konek Oracle:", err)
 	}
@@ -27,9 +27,13 @@ func main() {
 	r := gin.Default()
 
 	r.Use(cors.New(cors.Config{
-		AllowOrigins: []string{"http://localhost:5174"},
-		AllowMethods: []string{"GET", "POST", "PUT", "DELETE"},
-		AllowHeaders: []string{"Content-Type"},
+		AllowOrigins: []string{
+			"http://localhost:5173",
+			"http://localhost:5174",
+		},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Content-Type", "Authorization"},
+		AllowCredentials: true,
 	}))
 
 	h := handlers.NewHandler(db)

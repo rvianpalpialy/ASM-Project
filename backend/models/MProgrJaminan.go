@@ -1,6 +1,6 @@
 package models
 
-type Payor struct {
+type jaminan struct {
 	PayorCode     string `json:"payorCode"     binding:"required"`
 	PayorName     string `json:"payorName"     binding:"required"`
 	Address       string `json:"address"`

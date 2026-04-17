@@ -1,16 +1,19 @@
-import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Layout from './components/layout/Layout.jsx'
-import Dashboard from './components/dashboard/Dashboard.jsx'
-import PolicyInquiry from './components/policy/PolicyInquiry.jsx'
-import RegistrasiPayor from './components/policy/RegistrasiPayor.jsx'
-import RegistrasiPlan from './components/policy/RegistrasiPlan.jsx'
-import RegistrasiParticipant from './components/policy/RegistrasiParticipant.jsx'
-import ClaimInquiry from './components/claim/ClaimInquiry.jsx'
-import Summary from './components/claim/Summary.jsx'
-import HistoryClaim from './components/claim/HistoryClaim.jsx'
-import Report from './components/report/Report.jsx'
-import './styles/App.css'
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Layout from "./components/layout/Layout.jsx";
+import Dashboard from "./components/dashboard/Dashboard.jsx";
+import PolicyInquiry from "./components/policy/PolicyInquiry.jsx";
+import RegistrasiPayor from "./components/policy/RegistrasiPayor.jsx";
+import RegistrasiPlan from "./components/policy/RegistrasiPlan.jsx";
+import RegistrasiParticipant from "./components/policy/RegistrasiParticipant.jsx";
+import ClaimInquiry from "./components/claim/ClaimInquiry.jsx";
+import Summary from "./components/claim/Summary.jsx";
+import HistoryClaim from "./components/claim/HistoryClaim.jsx";
+import Report from "./components/report/Report.jsx";
+import MasterJaminan from "./components/policy/MasterJaminan/MasterJaminan.jsx";
+import DaftarPlan from "./components/policy/MasterJaminan/DaftarPlan.jsx";
+import PlanBenefit from "./components/policy/MasterJaminan/PlanBenefit.jsx";
+import "./styles/App.css";
 
 function App() {
   return (
@@ -27,7 +30,19 @@ function App() {
           {/* Sub Menu Policy */}
           <Route path="/policy/payor" element={<RegistrasiPayor />} />
           <Route path="/policy/plan" element={<RegistrasiPlan />} />
-          <Route path="/policy/participant" element={<RegistrasiParticipant />} />
+          <Route
+            path="/policy/participant"
+            element={<RegistrasiParticipant />}
+          />
+          <Route path="/policy/master-jaminan" element={<MasterJaminan />} />
+          <Route
+            path="/policy/master-jaminan/:programId/plan"
+            element={<DaftarPlan />}
+          />
+          <Route
+            path="/policy/master-jaminan/:programId/plan/:planId/benefit"
+            element={<PlanBenefit />}
+          />
 
           {/* Sub Menu Claim */}
           <Route path="/claim/summary" element={<Summary />} />
@@ -35,7 +50,7 @@ function App() {
         </Routes>
       </Layout>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;

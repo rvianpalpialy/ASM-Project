@@ -1,7 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import '../../styles/Policy.css';
-
+import React from "react";
+import { Link } from "react-router-dom";
+import "../../styles/Policy.css";
 
 const PolicyInquiry = () => {
   return (

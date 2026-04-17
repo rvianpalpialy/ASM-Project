@@ -67,6 +67,9 @@ const Navbar = () => {
               <Link to="/policy/participant" className="dropdown-item" onClick={closeMobileMenu}>
                 Registrasi Participant
               </Link>
+              <Link to="/policy/master-jaminan" className="dropdown-item" onClick={closeMobileMenu}>
+                Master Program Jaminan
+             </Link>
             </div>
           </div>
 
